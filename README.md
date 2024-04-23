@@ -33,4 +33,40 @@
 
 
 # Compose File
+Let's break down the code:
 
+```yaml
+version: "3"
+```
+This specifies the version of the Docker Compose file format being used. In this case, it's version 3.
+
+```yaml
+services:
+```
+This is where you define the services that make up your application.
+
+```yaml
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+```
+Defines a service named "frontend". It specifies that the frontend application will be built using the Dockerfile located in the "./frontend" directory. It also maps port 3000 of the container to port 3000 on the host, allowing access to the frontend application from the host machine.
+
+```yaml
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+```
+Defines a service named "backend". It specifies that the backend application will be built using the Dockerfile located in the "./backend" directory. It maps port 5000 of the container to port 5000 on the host.
+
+```yaml
+  database:
+    image: mongo
+    environment:
+      MONGO_ROOT_PASSWORD: my-secret-pw
+    ports:
+      - "27017:27017"
+```
+Defines a service named "database". It uses the official MongoDB Docker image from Docker Hub. It sets the environment variable `MONGO_ROOT_PASSWORD` to "my-secret-pw", which will be used as the root password for MongoDB. It maps port 27017 of the container to port 27017 on the host, allowing access to the MongoDB database from the host machine.
